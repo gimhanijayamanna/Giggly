@@ -1,0 +1,107 @@
+.chatlist {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .search {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        position: sticky;
+        top: 0;
+        background: inherit;
+        z-index: 10;
+
+        .searchbar {
+            flex: 1;
+            background-color: rgba(17, 25, 40, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-radius: 10px;
+            padding: 10px;
+
+            input {
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color: white;
+                flex: 1;
+            }
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .add {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(17, 25, 40, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .chatItems {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        /* Custom scrollbar styles */
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(17, 25, 40, 0.3);
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(10, 13, 18, 0.3);
+            border-radius: 3px;
+        }
+
+        /* Remove scrollbar arrows */
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 18px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .texts {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            span {
+                font-weight: 500;
+                color: white;
+            }
+
+            p {
+                font-size: 13px;
+                font-weight: 300;
+            }
+        }
+    }
+}
