@@ -77,6 +77,11 @@
                 transition: background-color 0.3s;
                 margin-top: 10px;
 
+                &:disabled {
+                    background-color: rgba(59, 130, 246, 0.5);
+                    cursor: not-allowed;
+                }
+
                 &:hover {
                     background-color: rgba(59, 130, 246, 1);
                 }
@@ -100,6 +105,15 @@
 
             &:hover {
                 color: rgba(59, 130, 246, 1);
+            }
+
+            &.disabled {
+                color: rgba(255, 255, 255, 0.3);
+                cursor: not-allowed;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.3);
+                }
             }
         }
     }

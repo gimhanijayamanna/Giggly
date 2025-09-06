@@ -1,5 +1,9 @@
 .detail {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
 
     .user {
         padding: 20px 20px;
@@ -8,6 +12,7 @@
         align-items: center;
         gap: 10px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+        flex-shrink: 0;
 
         img {
             width: 80px;
@@ -31,13 +36,35 @@
         }
     }
 
-    .info {
+    .scrollableContent {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
         padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+
+        /* Custom scrollbar styles */
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: rgba(17, 25, 40, 0.3);
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(10, 13, 18, 0.3);
+            border-radius: 3px;
+        }
+
+        /* Remove scrollbar arrows */
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
 
         .option {
+            margin-bottom: 20px;
+
             .title {
                 display: flex;
                 align-items: center;
@@ -104,6 +131,15 @@
                 }
             }
         }
+    }
+
+    .buttons {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.125);
+        flex-shrink: 0;
 
         button {
             padding: 10px 20px;
