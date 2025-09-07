@@ -28,6 +28,26 @@ const getFileTypeDisplay = (fileType) => {
     return 'Document';
 };
 
+// Helper function to format timestamp
+const formatMessageTime = (timestamp) => {
+    if (!timestamp) return '';
+
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const now = new Date();
+    const diffInHours = (now - date) / (1000 * 60 * 60);
+
+    if (diffInHours < 24) {
+        // Show time for messages from today
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+    } else if (diffInHours < 168) { // Less than a week
+        // Show day and time for messages from this week
+        return date.toLocaleDateString([], { weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: true });
+    } else {
+        // Show date for older messages
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+};
+
 const Chat = () => {
     const [chat, setChat] = useState([]);
     const [open, setOpen] = useState(false);
@@ -337,7 +357,7 @@ const Chat = () => {
                                 </div>
                             )}
                             {message.text && <p>{message.text}</p>}
-                            {/* <span>{message.createdAt}</span> */}
+                            <span>{formatMessageTime(message.createdAt)}</span>
                         </div>
                     </div>
                 ))}

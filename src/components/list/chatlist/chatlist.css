@@ -54,8 +54,8 @@
         }
 
         .add {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             background-color: #5183fe;
             padding: 8px;
             border-radius: 12px;
@@ -151,12 +151,17 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            min-width: 0;
+            overflow: hidden;
 
             span {
                 font-weight: 500;
                 color: white;
                 font-size: 16px;
                 letter-spacing: 0.3px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             p {
@@ -168,6 +173,22 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 line-height: 1.4;
+                max-width: 200px;
+            }
+        }
+
+        .timestamp {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            flex-shrink: 0;
+
+            span {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.5);
+                font-weight: 400;
+                white-space: nowrap;
             }
         }
     }

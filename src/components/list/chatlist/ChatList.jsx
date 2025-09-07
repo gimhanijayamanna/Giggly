@@ -6,6 +6,29 @@ import { useChatStore } from "../../../lib/chatStore";
 import { doc, onSnapshot, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
 
+// Helper function to format timestamp for chat list
+const formatChatListTime = (timestamp) => {
+    if (!timestamp) return '';
+
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInHours = (now - date) / (1000 * 60 * 60);
+
+    if (diffInHours < 1) {
+        // Show "now" for messages less than 1 hour old
+        return 'now';
+    } else if (diffInHours < 24) {
+        // Show time for messages from today
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+    } else if (diffInHours < 168) { // Less than a week
+        // Show day for messages from this week
+        return date.toLocaleDateString([], { weekday: 'short' });
+    } else {
+        // Show date for older messages
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+    }
+};
+
 const ChatList = () => {
     const [chats, setChats] = useState([]);
     const [addMode, setAddMode] = useState(false);
@@ -71,7 +94,7 @@ const ChatList = () => {
                 {filteredChats.map((chat) => (
                     <div className="item" key={chat.chatId} onClick={() => handleSelect(chat)}
                         style={{
-                            backgroundColor: (!chat?.isSeen && chat?.lastMessage && chat?.lastMessage.trim() !== "")
+                            backgroundColor: (!chat?.isSeen && chat?.lastMessage && chat?.lastMessage.trim() !== "" && chatId !== chat.chatId)
                                 ? "#5183fe"
                                 : "transparent"
                         }}
@@ -80,6 +103,9 @@ const ChatList = () => {
                         <div className="texts">
                             <span>{chat.user.blocked.includes(currentUser.id) ? "User" : chat.user.username}</span>
                             <p>{chat.lastMessage}</p>
+                        </div>
+                        <div className="timestamp">
+                            <span>{formatChatListTime(chat.updatedAt)}</span>
                         </div>
                     </div>
                 ))}
