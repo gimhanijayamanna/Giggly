@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.4) 0%, rgba(22, 33, 62, 0.4) 100%);
 
     .search {
         display: flex;
@@ -11,17 +12,26 @@
         padding: 20px;
         position: sticky;
         top: 0;
-        background: inherit;
+        background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+        backdrop-filter: blur(10px);
         z-index: 10;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
         .searchbar {
             flex: 1;
-            background-color: rgba(17, 25, 40, 0.5);
+            background-color: rgba(22, 33, 62, 0.6);
             display: flex;
             align-items: center;
             gap: 20px;
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+
+            &:focus-within {
+                border-color: #5183fe;
+                background-color: rgba(22, 33, 62, 0.8);
+            }
 
             input {
                 background-color: transparent;
@@ -29,21 +39,37 @@
                 outline: none;
                 color: white;
                 flex: 1;
+                font-size: 14px;
+
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.5);
+                }
             }
 
             img {
                 width: 20px;
                 height: 20px;
+                opacity: 0.7;
             }
         }
 
         .add {
-            width: 36px;
-            height: 36px;
-            background-color: rgba(17, 25, 40, 0.5);
-            padding: 10px;
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #5183fe;
+            padding: 8px;
+            border-radius: 12px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: #4169e1;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(81, 131, 254, 0.3);
+            }
         }
     }
 
@@ -54,17 +80,22 @@
 
         /* Custom scrollbar styles */
         &::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         &::-webkit-scrollbar-track {
-            background: rgba(17, 25, 40, 0.3);
-            border-radius: 3px;
+            background: rgba(22, 33, 62, 0.3);
+            border-radius: 6px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background: rgba(10, 13, 18, 0.3);
-            border-radius: 3px;
+            background: linear-gradient(135deg, rgba(81, 131, 254, 0.6) 0%, rgba(65, 105, 225, 0.6) 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            &:hover {
+                background: linear-gradient(135deg, rgba(81, 131, 254, 0.8) 0%, rgba(65, 105, 225, 0.8) 100%);
+            }
         }
 
         /* Remove scrollbar arrows */
@@ -77,30 +108,66 @@
         display: flex;
         align-items: center;
         gap: 20px;
-        padding: 18px;
+        padding: 20px;
         cursor: pointer;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s ease;
+        background: transparent;
+        position: relative;
+
+        &:hover {
+            background: linear-gradient(135deg, rgba(81, 131, 254, 0.15) 0%, rgba(65, 105, 225, 0.15) 100%);
+            transform: translateX(5px);
+            border-left: 3px solid rgba(81, 131, 254, 0.5);
+        }
+
+        &.selected {
+            background: linear-gradient(135deg, rgba(81, 131, 254, 0.25) 0%, rgba(65, 105, 225, 0.25) 100%);
+            border-left: 3px solid #5183fe;
+        }
+
+        &.unread {
+            background: linear-gradient(135deg, rgba(81, 131, 254, 0.35) 0%, rgba(65, 105, 225, 0.35) 100%) !important;
+            border-left: 3px solid #5183fe;
+            box-shadow: 0 2px 10px rgba(81, 131, 254, 0.25);
+        }
 
         img {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        &:hover img {
+            border-color: rgba(81, 131, 254, 0.5);
+            transform: scale(1.05);
         }
 
         .texts {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
 
             span {
                 font-weight: 500;
                 color: white;
+                font-size: 16px;
+                letter-spacing: 0.3px;
             }
 
             p {
-                font-size: 13px;
+                font-size: 14px;
                 font-weight: 300;
+                color: rgba(255, 255, 255, 0.7);
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                line-height: 1.4;
             }
         }
     }

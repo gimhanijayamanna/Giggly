@@ -1,0 +1,273 @@
+.editProfile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+    }
+
+    .modal {
+        position: relative;
+        background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        width: 90%;
+        max-width: 550px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        animation: slideIn 0.3s ease;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
+
+            h2 {
+                color: white;
+                margin: 0;
+                font-size: 24px;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+
+            .closeBtn {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                padding: 8px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+
+                &:hover {
+                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .content {
+            padding: 25px;
+
+            .avatarSection {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 30px;
+
+                .avatarPreview {
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                    margin-bottom: 15px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 3px solid rgba(255, 255, 255, 0.2);
+                        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            border-color: rgba(81, 131, 254, 0.5);
+                            transform: scale(1.05);
+                        }
+                    }
+
+                    .uploadingOverlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-size: 12px;
+                        backdrop-filter: blur(5px);
+                    }
+                }
+
+                .changeAvatarBtn {
+                    background: linear-gradient(135deg, rgba(81, 131, 254, 0.2) 0%, rgba(65, 105, 225, 0.2) 100%);
+                    backdrop-filter: blur(10px);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    transition: all 0.3s;
+                    font-weight: 500;
+
+                    &:hover:not(:disabled) {
+                        background: linear-gradient(135deg, rgba(81, 131, 254, 0.3) 0%, rgba(65, 105, 225, 0.3) 100%);
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 15px rgba(81, 131, 254, 0.3);
+                    }
+
+                    &:disabled {
+                        opacity: 0.5;
+                        cursor: not-allowed;
+                        transform: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .formSection {
+                .inputGroup {
+                    margin-bottom: 20px;
+
+                    label {
+                        display: block;
+                        color: white;
+                        margin-bottom: 10px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        letter-spacing: 0.3px;
+                    }
+
+                    input,
+                    textarea {
+                        width: 100%;
+                        padding: 15px 18px;
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+                        backdrop-filter: blur(10px);
+                        border: 1px solid rgba(255, 255, 255, 0.15);
+                        border-radius: 12px;
+                        color: white;
+                        font-size: 14px;
+                        transition: all 0.3s;
+                        box-sizing: border-box;
+                        font-family: inherit;
+
+                        &:focus {
+                            outline: none;
+                            border-color: #5183fe;
+                            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+                            box-shadow: 0 0 20px rgba(81, 131, 254, 0.3);
+                        }
+
+                        &:disabled {
+                            opacity: 0.5;
+                            cursor: not-allowed;
+                            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+                        }
+
+                        &::placeholder {
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+
+                    textarea {
+                        resize: vertical;
+                        min-height: 100px;
+                        max-height: 150px;
+                        line-height: 1.5;
+                    }
+
+                    .charCount {
+                        display: block;
+                        color: rgba(255, 255, 255, 0.6);
+                        font-size: 12px;
+                        margin-top: 8px;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+            button {
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s;
+                border: none;
+
+                &:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            }
+
+            .cancelBtn {
+                background-color: transparent;
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+
+                &:hover:not(:disabled) {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+
+            .saveBtn {
+                background-color: #5183fe;
+                color: white;
+
+                &:hover:not(:disabled) {
+                    background-color: #4169e1;
+                }
+            }
+        }
+    }
+
+    /* Custom scrollbar for modal */
+    .modal::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .modal::-webkit-scrollbar-track {
+        background: rgba(17, 25, 40, 0.3);
+        border-radius: 3px;
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .modal::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+}

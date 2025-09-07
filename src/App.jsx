@@ -12,7 +12,7 @@ import { useEffect } from "react";
 const App = () => {
 
     const { currentUser, isLoading, fetchUserInfo } = useUserStore();
-    const { chatId } = useChatStore();
+    const { chatId, isDetailVisible } = useChatStore();
 
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (user) => {
@@ -37,7 +37,7 @@ const App = () => {
                     <>
                         <List />
                         {chatId && <Chat />}
-                        {chatId && <Detail />}
+                        {chatId && isDetailVisible && <Detail />}
                     </>
                 ) : (
                     <Login />

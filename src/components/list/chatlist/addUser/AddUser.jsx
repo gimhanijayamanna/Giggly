@@ -4,7 +4,7 @@ import { collection, query, where, getDocs, doc, setDoc, serverTimestamp, update
 import { useState } from "react";
 import { useUserStore } from "../../../../lib/userStore";
 
-const AddUser = () => {
+const AddUser = ({ onClose, existingChats }) => {
     const [user, setuser] = useState(null);
     const { currentUser } = useUserStore();
 
@@ -28,6 +28,14 @@ const AddUser = () => {
     }
 
     const handleAdd = async () => {
+        // Check if chat already exists with this user
+        const existingChat = existingChats.find(chat => chat.user.id === user.id);
+
+        if (existingChat) {
+            console.log("Chat already exists with this user");
+            alert("You already have a chat with this user!");
+            return;
+        }
 
         const chatRef = collection(db, "chats");
         const userChatsRef = collection(db, "userchats");
@@ -57,6 +65,11 @@ const AddUser = () => {
             });
 
             console.log(newChatRef.id);
+
+            // Close the AddUser popup after successfully adding the user
+            if (onClose) {
+                onClose();
+            }
         } catch (err) {
             console.log(err);
         }

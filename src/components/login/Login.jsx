@@ -142,6 +142,7 @@ const Login = () => {
             {isLogin ? (
                 // Login Section
                 <div className="item">
+                    <img src="./Giggly.png" alt="Giggly Logo" className="logo" />
                     <h2>Welcome back</h2>
                     <form onSubmit={handleLogin}>
                         <input type="email" name="email" placeholder="Email" required disabled={loading} />
@@ -163,6 +164,7 @@ const Login = () => {
             ) : (
                 // Sign Up Section
                 <div className="item">
+                    <img src="./Giggly.png" alt="Giggly Logo" className="logo" />
                     <h2>Create an Account</h2>
                     <form onSubmit={handleRegister}>
                         <label htmlFor="file">

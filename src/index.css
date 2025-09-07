@@ -6,25 +6,16 @@
 }
 
 body {
-    background-color: #f0f0f0;
-    /*background-image: url("./bg.jpg");*/
-    display: flex;
-    /*center everything in thisbody*/
-    align-items: center;
-    /*center items vertically*/
-    justify-content: center;
-    /*center items horizontally*/
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
     height: 100vh;
-    /*body is not 100%*/
     color: white;
+    overflow: hidden;
 }
 
 .container {
-    width: 90vw;
-    height: 90vh;
-    background-color: #0c1844db;
-    backdrop-filter: blur(19px) saturate(180%);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
     display: flex;
 }

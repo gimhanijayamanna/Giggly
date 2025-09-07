@@ -6,6 +6,7 @@ export const useChatStore = create((set) => ({
     user: null,
     isCurrentUserBlocked: false,
     isReceiverBlocked: false,
+    isDetailVisible: false,
     changeChat: (chatId, user) => {
         const currentUser = useUserStore.getState().currentUser;
         //check if current user is blocked
@@ -37,6 +38,48 @@ export const useChatStore = create((set) => ({
         }
     },
     changeBlock: () => {
-        set(state => ({ ...state, isReceiverBlocked: !state.isReceiverBlocked }));
+        set(state => {
+            const currentUser = useUserStore.getState().currentUser;
+
+            if (!currentUser || !state.user) return state;
+
+            // Update current user's blocked array in the store
+            const updatedCurrentUser = { ...currentUser };
+
+            // If currently the receiver is blocked, unblock them
+            if (state.isReceiverBlocked) {
+                // Remove user from blocked list
+                updatedCurrentUser.blocked = currentUser.blocked.filter(id => id !== state.user.id);
+
+                // Update user store with new blocked list
+                useUserStore.setState({ currentUser: updatedCurrentUser });
+
+                return {
+                    ...state,
+                    isReceiverBlocked: false,
+                    isCurrentUserBlocked: false,
+                };
+            }
+            // If no one is blocked, block the receiver
+            else {
+                // Add user to blocked list
+                updatedCurrentUser.blocked = [...(currentUser.blocked || []), state.user.id];
+
+                // Update user store with new blocked list
+                useUserStore.setState({ currentUser: updatedCurrentUser });
+
+                return {
+                    ...state,
+                    isReceiverBlocked: true,
+                    isCurrentUserBlocked: false,
+                };
+            }
+        });
+    },
+    toggleDetail: () => {
+        set(state => ({ ...state, isDetailVisible: !state.isDetailVisible }));
+    },
+    hideDetail: () => {
+        set(state => ({ ...state, isDetailVisible: false }));
     }
 }))

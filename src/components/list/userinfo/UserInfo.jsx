@@ -1,8 +1,20 @@
 import "./userinfo.css";
+import { useState } from "react";
 import { useUserStore } from "../../../lib/userStore";
-const UserInfo = () => {
+import EditProfile from "../../editProfile/EditProfile";
 
+const UserInfo = () => {
     const { currentUser } = useUserStore();
+    const [showEditProfile, setShowEditProfile] = useState(false);
+
+    const handleEditProfile = () => {
+        setShowEditProfile(true);
+    };
+
+    const handleCloseEditProfile = () => {
+        setShowEditProfile(false);
+    };
+
     return (
         <div className="userinfo">
             <div className="user">
@@ -10,10 +22,17 @@ const UserInfo = () => {
                 <h2>{currentUser.username}</h2>
             </div>
             <div className="icons">
-                <img src="./more.png" alt="More Options" />
-                <img src="./video.png" alt="Video Call" />
-                <img src="./edit.png" alt="Edit Profile" />
+                <img
+                    src="./edit.png"
+                    alt="Edit Profile"
+                    onClick={handleEditProfile}
+                    style={{ cursor: 'pointer' }}
+                />
             </div>
+
+            {showEditProfile && (
+                <EditProfile onClose={handleCloseEditProfile} />
+            )}
         </div>
     )
 }

@@ -2,7 +2,8 @@
 const CLOUDINARY_CONFIG = {
     cloudName: "ddy2j87xc",
     uploadPreset: "Giggly",
-    apiUrl: "https://api.cloudinary.com/v1_1/ddy2j87xc/image/upload"
+    imageApiUrl: "https://api.cloudinary.com/v1_1/ddy2j87xc/image/upload",
+    rawApiUrl: "https://api.cloudinary.com/v1_1/ddy2j87xc/raw/upload"
 };
 
 export const uploadToCloudinary = async (file) => {
@@ -12,7 +13,11 @@ export const uploadToCloudinary = async (file) => {
         formData.append("upload_preset", CLOUDINARY_CONFIG.uploadPreset);
         formData.append("cloud_name", CLOUDINARY_CONFIG.cloudName);
 
-        const response = await fetch(CLOUDINARY_CONFIG.apiUrl, {
+        // Determine if it's an image or raw file
+        const isImage = file.type.startsWith('image/');
+        const apiUrl = isImage ? CLOUDINARY_CONFIG.imageApiUrl : CLOUDINARY_CONFIG.rawApiUrl;
+
+        const response = await fetch(apiUrl, {
             method: "POST",
             body: formData
         });
@@ -33,7 +38,9 @@ export const uploadToCloudinary = async (file) => {
             width: data.width,
             height: data.height,
             format: data.format,
-            bytes: data.bytes
+            bytes: data.bytes,
+            resourceType: data.resource_type,
+            originalFilename: data.original_filename
         };
     } catch (error) {
         console.error("Error uploading to Cloudinary:", error);
