@@ -19,3 +19,21 @@ body {
     backdrop-filter: blur(20px) saturate(180%);
     display: flex;
 }
+
+/* Mobile styles */
+.container.mobile {
+    flex-direction: column;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+}

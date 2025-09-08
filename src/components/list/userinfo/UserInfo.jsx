@@ -1,18 +1,13 @@
 import "./userinfo.css";
-import { useState } from "react";
 import { useUserStore } from "../../../lib/userStore";
-import EditProfile from "../../editProfile/EditProfile";
+import { useChatStore } from "../../../lib/chatStore";
 
 const UserInfo = () => {
     const { currentUser } = useUserStore();
-    const [showEditProfile, setShowEditProfile] = useState(false);
+    const { toggleEditProfile } = useChatStore();
 
     const handleEditProfile = () => {
-        setShowEditProfile(true);
-    };
-
-    const handleCloseEditProfile = () => {
-        setShowEditProfile(false);
+        toggleEditProfile();
     };
 
     return (
@@ -29,10 +24,6 @@ const UserInfo = () => {
                     style={{ cursor: 'pointer' }}
                 />
             </div>
-
-            {showEditProfile && (
-                <EditProfile onClose={handleCloseEditProfile} />
-            )}
         </div>
     )
 }

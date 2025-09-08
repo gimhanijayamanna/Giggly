@@ -5,3 +5,22 @@
     display: flex;
     flex-direction: column;
 }
+
+/* Tablet responsiveness */
+@media (max-width: 1024px) {
+    .list {
+        flex: 1;
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .list {
+        flex: 1;
+        min-width: 100%;
+        max-width: 100%;
+        height: 100%;
+    }
+}

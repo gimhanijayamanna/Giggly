@@ -271,3 +271,105 @@
         background: rgba(255, 255, 255, 0.5);
     }
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .editProfile {
+        .modal {
+            width: 95%;
+            max-width: none;
+            margin: 10px;
+            border-radius: 15px;
+            max-height: 95vh;
+
+            .header {
+                padding: 15px;
+
+                h2 {
+                    font-size: 20px;
+                }
+
+                .closeBtn {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 18px;
+                }
+            }
+
+            .content {
+                padding: 20px 15px;
+
+                .avatarSection {
+                    margin-bottom: 25px;
+
+                    .avatarPreview {
+                        width: 100px;
+                        height: 100px;
+                    }
+
+                    .changeAvatarBtn {
+                        padding: 8px 16px;
+                        font-size: 13px;
+                    }
+                }
+
+                .formSection {
+                    .inputGroup {
+                        margin-bottom: 18px;
+
+                        input,
+                        textarea {
+                            padding: 12px 15px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            .footer {
+                padding: 12px 15px;
+                flex-direction: column;
+                gap: 10px;
+
+                button {
+                    width: 100%;
+                    padding: 12px 20px;
+                    font-size: 14px;
+                }
+
+                .saveBtn {
+                    order: -1;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .editProfile {
+        .modal {
+            width: 98%;
+            margin: 5px;
+            border-radius: 12px;
+
+            .header {
+                padding: 12px;
+
+                h2 {
+                    font-size: 18px;
+                }
+            }
+
+            .content {
+                padding: 15px 12px;
+
+                .avatarSection {
+                    .avatarPreview {
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+            }
+        }
+    }
+}

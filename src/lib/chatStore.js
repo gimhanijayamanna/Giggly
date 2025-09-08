@@ -7,8 +7,23 @@ export const useChatStore = create((set) => ({
     isCurrentUserBlocked: false,
     isReceiverBlocked: false,
     isDetailVisible: false,
+    // Mobile/responsive states
+    currentView: 'list', // 'list', 'chat', 'detail'
+    isEditProfileVisible: false,
+
+    setCurrentView: (view) => set({ currentView: view }),
+
+    toggleEditProfile: () => set(state => ({
+        isEditProfileVisible: !state.isEditProfileVisible
+    })),
+
+    hideEditProfile: () => set({ isEditProfileVisible: false }),
     changeChat: (chatId, user) => {
         const currentUser = useUserStore.getState().currentUser;
+
+        // Check screen size for mobile navigation
+        const isMobile = window.innerWidth <= 1024;
+
         //check if current user is blocked
         if (user.blocked.includes(currentUser.id)) {
             return set({
@@ -16,6 +31,7 @@ export const useChatStore = create((set) => ({
                 user: null,
                 isCurrentUserBlocked: true,
                 isReceiverBlocked: false,
+                currentView: isMobile ? 'chat' : 'list',
             });
         }
 
@@ -26,6 +42,7 @@ export const useChatStore = create((set) => ({
                 user: user,
                 isCurrentUserBlocked: false,
                 isReceiverBlocked: true,
+                currentView: isMobile ? 'chat' : 'list',
             });
         }
         else {
@@ -34,6 +51,7 @@ export const useChatStore = create((set) => ({
                 user,
                 isCurrentUserBlocked: false,
                 isReceiverBlocked: false,
+                currentView: isMobile ? 'chat' : 'list',
             });
         }
     },
@@ -77,9 +95,15 @@ export const useChatStore = create((set) => ({
         });
     },
     toggleDetail: () => {
-        set(state => ({ ...state, isDetailVisible: !state.isDetailVisible }));
+        set(state => ({
+            ...state,
+            isDetailVisible: !state.isDetailVisible
+        }));
     },
     hideDetail: () => {
-        set(state => ({ ...state, isDetailVisible: false }));
+        set(state => ({
+            ...state,
+            isDetailVisible: false
+        }));
     }
 }))

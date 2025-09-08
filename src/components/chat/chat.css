@@ -16,10 +16,37 @@
         background: linear-gradient(135deg, rgba(26, 26, 46, 0.7) 0%, rgba(22, 33, 62, 0.7) 100%);
         backdrop-filter: blur(10px);
 
+        .backButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+            img {
+                width: 16px;
+                height: 16px;
+                opacity: 0.8;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
         .user {
             display: flex;
             align-items: center;
             gap: 20px;
+            flex: 1;
 
             img {
                 width: 50px;
@@ -385,6 +412,85 @@
                 opacity: 0.5;
             }
         }
+
+        .imagePreview {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px;
+            transition: all 0.3s ease;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 5px;
+                object-fit: cover;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .removeButton {
+                margin-left: 8px;
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                font-size: 16px;
+                opacity: 0.7;
+                transition: all 0.3s ease;
+                padding: 2px 6px;
+                border-radius: 4px;
+
+                &:hover {
+                    opacity: 1;
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .filePreview {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+
+            .fileName {
+                color: white;
+                font-size: 12px;
+                margin-right: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 120px;
+            }
+
+            .removeButton {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                font-size: 16px;
+                opacity: 0.7;
+                transition: all 0.3s ease;
+                padding: 2px 6px;
+                border-radius: 4px;
+
+                &:hover {
+                    opacity: 1;
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: scale(1.1);
+                }
+            }
+        }
     }
 
     /* Image Popup Styles */
@@ -479,6 +585,176 @@
         to {
             opacity: 1;
             transform: scale(1) translateY(0);
+        }
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+    .chat {
+        flex: 1;
+        width: 100%;
+        height: 100vh;
+        border-left: none;
+        border-right: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat {
+        .top {
+            padding: 15px;
+
+            .backButton {
+                width: 28px;
+                height: 28px;
+                margin-right: 10px;
+
+                img {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+
+            .user {
+                gap: 15px;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .texts span {
+                    font-size: 16px;
+                }
+            }
+
+            .icons img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        .center {
+            padding: 15px;
+
+            .message {
+                max-width: 85%;
+                gap: 10px;
+
+                .texts {
+                    gap: 6px;
+
+                    p {
+                        padding: 10px 15px;
+                        font-size: 14px;
+                    }
+
+                    img {
+                        width: 250px;
+                        height: 250px;
+                    }
+                }
+            }
+        }
+
+        .bottom {
+            padding: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            input {
+                padding: 10px 15px;
+                font-size: 14px;
+                min-width: 0;
+                flex: 1;
+            }
+
+            .sendButton {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .imagePreview {
+                margin: 0 5px;
+                padding: 6px;
+
+                img {
+                    width: 35px;
+                    height: 35px;
+                }
+
+                .removeButton {
+                    margin-left: 6px;
+                    font-size: 14px;
+                    padding: 1px 4px;
+                }
+            }
+
+            .filePreview {
+                margin: 0 5px;
+                padding: 6px 8px;
+
+                .fileName {
+                    font-size: 11px;
+                    max-width: 80px;
+                    margin-right: 8px;
+                }
+
+                .removeButton {
+                    font-size: 14px;
+                    padding: 1px 4px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .chat {
+        .bottom {
+            padding: 12px;
+            gap: 8px;
+
+            .imagePreview {
+                margin: 0 3px;
+                padding: 5px;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                .removeButton {
+                    margin-left: 5px;
+                    font-size: 12px;
+                }
+            }
+
+            .filePreview {
+                margin: 0 3px;
+                padding: 5px 6px;
+
+                .fileName {
+                    font-size: 10px;
+                    max-width: 60px;
+                    margin-right: 6px;
+                }
+
+                .removeButton {
+                    font-size: 12px;
+                }
+            }
+
+            input {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .sendButton {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
         }
     }
 }

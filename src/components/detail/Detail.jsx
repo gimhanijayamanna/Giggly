@@ -8,7 +8,16 @@ import { db } from "../../lib/firebase";
 import { useEffect, useState } from "react";
 
 const Detail = () => {
-    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock, changeChat } = useChatStore();
+    const {
+        chatId,
+        user,
+        isCurrentUserBlocked,
+        isReceiverBlocked,
+        changeBlock,
+        changeChat,
+        hideDetail,
+        setCurrentView
+    } = useChatStore();
     const { currentUser } = useUserStore();
 
     const [chatData, setChatData] = useState(null);
@@ -16,6 +25,16 @@ const Detail = () => {
     const [sharedFiles, setSharedFiles] = useState([]);
     const [showPhotos, setShowPhotos] = useState(true);
     const [showFiles, setShowFiles] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Real-time listeners to detect blocking changes
     useEffect(() => {
@@ -159,8 +178,23 @@ const Detail = () => {
         }
     };
 
+    const handleClose = () => {
+        if (isMobile) {
+            setCurrentView('chat');
+        }
+        hideDetail();
+    };
+
     return (
-        <div className="detail">
+        <div className={`detail ${isMobile ? 'mobile' : ''}`}>
+            {isMobile && (
+                <div className="mobileHeader">
+                    <div className="closeButton" onClick={handleClose}>
+                        <img src="./arrowDown.png" alt="Close" style={{ transform: 'rotate(90deg)' }} />
+                    </div>
+                    <h3>User Details</h3>
+                </div>
+            )}
             <div className="user">
                 <img src={user?.avatar || "./avatar.png"} alt="" />
                 <h2>{user?.username}</h2>

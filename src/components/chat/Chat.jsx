@@ -69,11 +69,22 @@ const Chat = () => {
     });
 
     const { currentUser } = useUserStore();
-    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, toggleDetail } = useChatStore();
+    const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, toggleDetail, setCurrentView } = useChatStore();
 
     const endRef = useRef(null);
     const fileInputRef = useRef(null);
     const docFileInputRef = useRef(null);
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Auto scroll to bottom
     useEffect(() => {
@@ -299,6 +310,11 @@ const Chat = () => {
     return (
         <div className="chat">
             <div className="top">
+                {isMobile && (
+                    <div className="backButton" onClick={() => setCurrentView('list')}>
+                        <img src="./arrowDown.png" alt="Back" style={{ transform: 'rotate(90deg)' }} />
+                    </div>
+                )}
                 <div className="user">
                     <img src={user?.avatar || "./avatar.png"} alt="" />
                     <div className="texts">
@@ -391,24 +407,24 @@ const Chat = () => {
                     />
                 </div>
                 {img.url && (
-                    <div className="imagePreview" style={{ margin: '0 10px' }}>
-                        <img src={img.url} alt="Preview" style={{ width: '40px', height: '40px', borderRadius: '5px', objectFit: 'cover' }} />
+                    <div className="imagePreview">
+                        <img src={img.url} alt="Preview" />
                         <button
+                            className="removeButton"
                             onClick={() => setImg({ file: null, url: "" })}
-                            style={{ marginLeft: '5px', background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}
                         >
                             ✕
                         </button>
                     </div>
                 )}
                 {file.url && (
-                    <div className="filePreview" style={{ margin: '0 10px', display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.1)', padding: '5px 10px', borderRadius: '5px' }}>
-                        <span style={{ color: 'white', fontSize: '12px', marginRight: '10px' }}>
+                    <div className="filePreview">
+                        <span className="fileName">
                             📄 {file.name}
                         </span>
                         <button
+                            className="removeButton"
                             onClick={() => setFile({ file: null, url: "", name: "", type: "" })}
-                            style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}
                         >
                             ✕
                         </button>

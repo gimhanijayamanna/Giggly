@@ -369,3 +369,120 @@
         }
     }
 }
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+    .detail {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+        backdrop-filter: blur(20px);
+
+        .mobileHeader {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%);
+
+            .closeButton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-right: 15px;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    opacity: 0.8;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            h3 {
+                color: white;
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .detail {
+        .user {
+            padding: 20px;
+
+            img {
+                width: 80px;
+                height: 80px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+        }
+
+        .scrollableContent {
+            padding: 15px;
+
+            .option {
+                margin-bottom: 20px;
+
+                .title {
+                    padding: 10px 12px;
+
+                    span {
+                        font-size: 15px;
+                    }
+                }
+
+                .photos .photoItem,
+                .files .fileItem {
+                    padding: 12px;
+
+                    .photoDetail img {
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    .download {
+                        width: 32px;
+                        height: 32px;
+
+                        img {
+                            width: 16px;
+                            height: 16px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .buttons {
+            padding: 15px;
+
+            button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+    }
+}
